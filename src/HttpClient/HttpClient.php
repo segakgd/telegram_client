@@ -1,6 +1,7 @@
 <?php
 
-namespace Client;
+namespace telegram_client\HttpClient;
+
 class HttpClient
 {
 

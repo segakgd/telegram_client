@@ -1,6 +1,6 @@
 <?php
 
-namespace Client;
+namespace telegram_client\HttpClient;
 
 interface HttpClientInterface
 {
