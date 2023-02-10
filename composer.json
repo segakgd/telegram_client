@@ -1,0 +1,19 @@
+{
+  "name": "segakgd/telegram_client",
+  "description": "A PHP client for using Telegram API",
+  "keywords": [
+    "telegram", "api", "wrapper", "client"
+  ],
+  "homepage": "https://github.com/segakgd/telegram_client",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Segrey Krivosheev",
+      "email": "segakgd@yandex.ru",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php" : ">=8.0"
+  }
+}
