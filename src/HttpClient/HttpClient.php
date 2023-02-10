@@ -2,7 +2,7 @@
 
 namespace telegram_client\HttpClient;
 
-class HttpClient
+class HttpClient implements HttpClientInterface
 {
 
 }

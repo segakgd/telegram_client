@@ -2,7 +2,7 @@
 
 namespace telegram_client\Service;
 
-class TelegramService
+class TelegramService implements TelegramServiceInterface
 {
 
 }
