@@ -2,7 +2,13 @@
 
 namespace telegram_client\Service;
 
+use telegram_client\Dto\Message\MessageDto;
+use telegram_client\HttpClient\HttpClientInterface;
+
 class TelegramService implements TelegramServiceInterface
 {
-
+    public function sendMessage(HttpClientInterface $httpClient, MessageDto $messageDto)
+    {
+        $httpClient->request($messageDto);
+    }
 }
