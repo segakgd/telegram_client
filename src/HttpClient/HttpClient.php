@@ -16,7 +16,7 @@ class HttpClient implements HttpClientInterface
         $requestArray = $request->getArray();
 
         $scenarioMethod = "setWebhook";
-        $token = "5109953245:AAE7TIhplLRxJdGmM27YSeSIdJdOh4ZXVVY"; // todo bad idea
+        $token = "5660716033:AAGdLfYVBF54m_41lZLUn_6IQvwjmAV2ZGM"; // todo bad idea
 
         $uri = "https://api.telegram.org/bot$token/$scenarioMethod";
 
