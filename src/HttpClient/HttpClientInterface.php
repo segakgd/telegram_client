@@ -7,5 +7,5 @@ use telegram_client\Dto\ResponseInterface;
 
 interface HttpClientInterface
 {
-    public function request(RequestInterface $request): ResponseInterface;
+    public function request(RequestInterface $request, string $scenarioMethod): ResponseInterface;
 }
