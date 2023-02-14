@@ -200,6 +200,9 @@ class MessageDto implements RequestInterface
 
     public function getArray(): array
     {
-        return [];
+        return [
+            'chat_id' => $this->getChatId(),
+            'text' => $this->getText(),
+        ];
     }
 }

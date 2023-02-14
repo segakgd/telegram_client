@@ -8,13 +8,13 @@ use telegram_client\HttpClient\HttpClientInterface;
 
 class TelegramService implements TelegramServiceInterface
 {
-    public function sendMessage(HttpClientInterface $httpClient, MessageDto $messageDto)
+    public function sendMessage(HttpClientInterface $httpClient, MessageDto $messageDto, string $token)
     {
-        $httpClient->request($messageDto, 'sendMessage');
+        $httpClient->request($messageDto, 'sendMessage', $token);
     }
 
-    public function setWebhook(HttpClientInterface $httpClient, WebhookDto $webhookDto)
+    public function setWebhook(HttpClientInterface $httpClient, WebhookDto $webhookDto, string $token)
     {
-        $httpClient->request($webhookDto, 'setWebhook');
+        $httpClient->request($webhookDto, 'setWebhook', $token);
     }
 }

@@ -10,6 +10,7 @@ interface HttpClientInterface
     public function request(
         RequestInterface $request,
         string $scenarioMethod,
+        string $token,
         string $requestMethod,
     ): ResponseInterface;
 }

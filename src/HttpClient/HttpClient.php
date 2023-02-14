@@ -14,20 +14,18 @@ class HttpClient implements HttpClientInterface
     public function request(
         RequestInterface $request,
         string $scenarioMethod,
+        string $token,
         string $requestMethod = self::METHOD_POST,
     ): ResponseInterface {
         $requestArray = $request->getArray();
 
-        $scenarioMethod = "setWebhook";
-        $token = "5660716033:AAGdLfYVBF54m_41lZLUn_6IQvwjmAV2ZGM"; // todo bad idea
-
         $uri = "https://api.telegram.org/bot$token/$scenarioMethod";
-
         $responseArray = $this->curlRequest($uri, $requestArray, $requestMethod);
 
         $code = $responseArray['ok'] === true ? 200 : 400;
+        $description = $responseArray['description'] ?? '';
 
-        return new Response($code, $responseArray['description']);
+        return new Response($code, $description);
     }
 
     private function curlRequest(string $uri, array $requestArray, string $method): array
