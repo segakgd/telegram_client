@@ -2,9 +2,7 @@
 
 namespace telegram_client\Dto\Chat;
 
-use telegram_client\Dto\RequestInterface;
-
-class ChatDto implements RequestInterface
+class ChatDto
 {
     public function getArray(): array
     {

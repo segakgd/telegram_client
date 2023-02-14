@@ -2,25 +2,22 @@
 
 namespace telegram_client\HttpClient;
 
-use telegram_client\Dto\RequestInterface;
-use telegram_client\Dto\Response;
-use telegram_client\Dto\ResponseInterface;
+use telegram_client\HttpClient\Request\RequestInterface;
+use telegram_client\HttpClient\Response\Response;
+use telegram_client\HttpClient\Response\ResponseInterface;
 
 class HttpClient implements HttpClientInterface
 {
     public const METHOD_POST = 'POST';
     public const METHOD_GET = 'GET';
 
-    public function request(
-        RequestInterface $request,
-        string $scenarioMethod,
-        string $token,
-        string $requestMethod = self::METHOD_POST,
-    ): ResponseInterface {
-        $requestArray = $request->getArray();
+    public function request(RequestInterface $request): ResponseInterface
+    {
+        $token = $request->getToken();
+        $scenario = $request->getScenario();
 
-        $uri = "https://api.telegram.org/bot$token/$scenarioMethod";
-        $responseArray = $this->curlRequest($uri, $requestArray, $requestMethod);
+        $uri = "https://api.telegram.org/bot$token/$scenario";
+        $responseArray = $this->curlRequest($uri, $request->getData(), $request->getMethod());
 
         $code = $responseArray['ok'] === true ? 200 : 400;
         $description = $responseArray['description'] ?? '';

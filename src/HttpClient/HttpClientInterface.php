@@ -2,15 +2,10 @@
 
 namespace telegram_client\HttpClient;
 
-use telegram_client\Dto\RequestInterface;
-use telegram_client\Dto\ResponseInterface;
+use telegram_client\HttpClient\Request\RequestInterface;
+use telegram_client\HttpClient\Response\ResponseInterface;
 
 interface HttpClientInterface
 {
-    public function request(
-        RequestInterface $request,
-        string $scenarioMethod,
-        string $token,
-        string $requestMethod,
-    ): ResponseInterface;
+    public function request(RequestInterface $request): ResponseInterface;
 }

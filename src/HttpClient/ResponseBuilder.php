@@ -2,7 +2,7 @@
 
 namespace telegram_client\HttpClient;
 
-use telegram_client\Dto\ResponseInterface;
+use telegram_client\HttpClient\Response\ResponseInterface;
 
 class ResponseBuilder implements ResponseBuilderInterface
 {

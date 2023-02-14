@@ -2,9 +2,7 @@
 
 namespace telegram_client\Dto\Webhook;
 
-use telegram_client\Dto\RequestInterface;
-
-class WebhookDto implements RequestInterface
+class WebhookDto
 {
     private string $url;
 
