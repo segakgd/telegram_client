@@ -11,8 +11,11 @@ class HttpClient implements HttpClientInterface
     public const METHOD_POST = 'POST';
     public const METHOD_GET = 'GET';
 
-    public function request(RequestInterface $request, string $scenarioMethod): ResponseInterface
-    {
+    public function request(
+        RequestInterface $request,
+        string $scenarioMethod,
+        string $requestMethod = self::METHOD_POST,
+    ): ResponseInterface {
         $requestArray = $request->getArray();
 
         $scenarioMethod = "setWebhook";
@@ -20,7 +23,7 @@ class HttpClient implements HttpClientInterface
 
         $uri = "https://api.telegram.org/bot$token/$scenarioMethod";
 
-        $responseArray = $this->curlRequest($uri, $requestArray, self::METHOD_POST);
+        $responseArray = $this->curlRequest($uri, $requestArray, $requestMethod);
 
         $code = $responseArray['ok'] === true ? 200 : 400;
 
