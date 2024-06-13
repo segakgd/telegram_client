@@ -1,6 +1,6 @@
 <?php
 
-namespace telegram_client\Service;
+namespace App\Service\Integration\Telegram;
 
 interface TelegramServiceInterface
 {

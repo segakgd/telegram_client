@@ -1,6 +1,6 @@
 <?php
 
-namespace telegram_client\HttpClient\Response;
+namespace App\Service\System\HttpClient\Response;
 
 class Response implements ResponseInterface
 {
@@ -11,6 +11,26 @@ class Response implements ResponseInterface
     public function __construct($code, $description)
     {
         $this->code = $code;
+        $this->description = $description;
+    }
+
+    public function getCode(): int
+    {
+        return $this->code;
+    }
+
+    public function setCode(int $code): void
+    {
+        $this->code = $code;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): void
+    {
         $this->description = $description;
     }
 }
