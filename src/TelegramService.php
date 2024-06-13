@@ -2,28 +2,23 @@
 
 namespace Segakgd\TelegramClient;
 
-use App\Dto\Responsible\ResponsibleMessageDto;
-use App\Dto\Core\Telegram\Request\Invoice\InvoiceDto;
-use App\Dto\Core\Telegram\Request\Message\MessageDto;
-use App\Dto\Core\Telegram\Request\Message\PhotoDto;
-use App\Dto\Core\Telegram\Request\Webhook\WebhookDto;
-use App\Dto\Core\Telegram\Response\GetWebhookInfoDto;
-use App\Service\System\HttpClient\HttpClient;
-use App\Service\System\HttpClient\HttpClientInterface;
-use App\Service\System\HttpClient\Request\Request;
-use App\Service\System\HttpClient\Response\ResponseInterface;
+use Segakgd\TelegramClient\Dto\Request\Invoice\InvoiceDto;
+use Segakgd\TelegramClient\Dto\Request\Message\MessageDto;
+use Segakgd\TelegramClient\Dto\Request\Message\PhotoDto;
+use Segakgd\TelegramClient\Dto\Request\Webhook\WebhookDto;
+use Segakgd\TelegramClient\Dto\Response\GetWebhookInfoDto;
+use Segakgd\TelegramClient\HttpClient\HttpClient;
+use Segakgd\TelegramClient\HttpClient\Request\Request;
+use Segakgd\TelegramClient\HttpClient\Response\Response;
 
-readonly class TelegramService implements TelegramServiceInterface
+readonly class TelegramService
 {
     public function __construct(
-        private HttpClientInterface $httpClient,
+        private HttpClient $httpClient,
     ) {
     }
 
-    /**
-     * @return GetWebhookInfoDto
-     */
-    public function getWebhookInfo(string $token): ResponseInterface
+    public function getWebhookInfo(string $token): Response
     {
         $request = $this->buildRequest(
             HttpClient::METHOD_GET,
@@ -36,7 +31,7 @@ readonly class TelegramService implements TelegramServiceInterface
         return $this->httpClient->request($request);
     }
 
-    public function sendPhoto(ResponsibleMessageDto $responsibleMessageDto, string $token, int $chatId): void
+    public function sendPhoto($responsibleMessageDto, string $token, int $chatId): void
     {
         $message = $responsibleMessageDto->getMessage();
         $replyMarkup = $responsibleMessageDto->getKeyBoard();
@@ -60,10 +55,8 @@ readonly class TelegramService implements TelegramServiceInterface
         $this->httpClient->request($request);
     }
 
-    public function sendMessage(ResponsibleMessageDto $responsibleMessageDto, string $token, int $chatId): void
+    public function sendMessage($responsibleMessageDto, string $token, int $chatId): void
     {
-        // БАГ! при отправке в реживе setParseMode = MarkdownV2, с сообщением в котором есть многоточие - случается 400я - нтелега не может распарсить
-
         $message = $responsibleMessageDto->getMessage();
         $replyMarkup = $responsibleMessageDto->getKeyBoard();
 

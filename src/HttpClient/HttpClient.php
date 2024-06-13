@@ -2,16 +2,15 @@
 
 namespace Segakgd\TelegramClient\HttpClient;
 
+use Segakgd\TelegramClient\HttpClient\Request\Request;
+use Segakgd\TelegramClient\HttpClient\Response\Response;
+
 class HttpClient
 {
     public const METHOD_POST = 'POST';
     public const METHOD_GET = 'GET';
 
-    public function __construct(private readonly SerializerInterface $serializer)
-    {
-    }
-
-    public function request(RequestInterface $request): ResponseInterface
+    public function request(Request $request): Response
     {
         $token = $request->getToken();
         $scenario = $request->getScenario();
@@ -35,11 +34,11 @@ class HttpClient
         $responseClassName = $request->getResponseClassName();
 
         if ($code == 400) {
-            dd('HTTP error!', $result, $request);
+            throw new \Exception('Error code 400');
         }
 
         if ($responseClassName) {
-            return $this->serializer->denormalize($result, $responseClassName, 'json');
+            // todo make responce
         }
 
         return new Response($code, $description);
