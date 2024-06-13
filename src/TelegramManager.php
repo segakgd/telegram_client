@@ -8,16 +8,15 @@ use Segakgd\TelegramClient\Dto\Request\Message\PhotoDto;
 use Segakgd\TelegramClient\Dto\Request\Webhook\WebhookDto;
 use Segakgd\TelegramClient\Dto\Response\GetWebhookInfoDto;
 use Segakgd\TelegramClient\HttpClient\HttpClient;
+use Segakgd\TelegramClient\HttpClient\Request\BadRequestException;
 use Segakgd\TelegramClient\HttpClient\Request\Request;
 use Segakgd\TelegramClient\HttpClient\Response\Response;
 
-readonly class TelegramService
+readonly class TelegramManager
 {
-    public function __construct(
-        private HttpClient $httpClient,
-    ) {
-    }
-
+    /**
+     * @throws BadRequestException
+     */
     public function getWebhookInfo(string $token): Response
     {
         $request = $this->buildRequest(
@@ -28,10 +27,14 @@ readonly class TelegramService
             GetWebhookInfoDto::class
         );
 
-        return $this->httpClient->request($request);
+
+        return (new HttpClient())->request($request);
     }
 
-    public function sendPhoto($responsibleMessageDto, string $token, int $chatId): void
+    /**
+     * @throws BadRequestException
+     */
+    public function sendPhoto($responsibleMessageDto, string $token, int $chatId): Response
     {
         $message = $responsibleMessageDto->getMessage();
         $replyMarkup = $responsibleMessageDto->getKeyBoard();
@@ -52,10 +55,13 @@ readonly class TelegramService
             $photoDto->getArray(),
         );
 
-        $this->httpClient->request($request);
+        return (new HttpClient())->request($request);
     }
 
-    public function sendMessage($responsibleMessageDto, string $token, int $chatId): void
+    /**
+     * @throws BadRequestException
+     */
+    public function sendMessage($responsibleMessageDto, string $token, int $chatId): Response
     {
         $message = $responsibleMessageDto->getMessage();
         $replyMarkup = $responsibleMessageDto->getKeyBoard();
@@ -73,10 +79,13 @@ readonly class TelegramService
             $messageDto->getArray(),
         );
 
-        $this->httpClient->request($request);
+        return (new HttpClient())->request($request);
     }
 
-    public function sendInvoice(InvoiceDto $invoiceDto, string $token): void
+    /**
+     * @throws BadRequestException
+     */
+    public function sendInvoice(InvoiceDto $invoiceDto, string $token): Response
     {
         $request = $this->buildRequest(
             HttpClient::METHOD_POST,
@@ -85,10 +94,13 @@ readonly class TelegramService
             $invoiceDto->getArray(),
         );
 
-        $this->httpClient->request($request);
+        return (new HttpClient())->request($request);
     }
 
-    public function setWebhook(WebhookDto $webhookDto, string $token): void
+    /**
+     * @throws BadRequestException
+     */
+    public function setWebhook(WebhookDto $webhookDto, string $token): Response
     {
         $request = $this->buildRequest(
             HttpClient::METHOD_POST,
@@ -97,7 +109,7 @@ readonly class TelegramService
             $webhookDto->getArray(),
         );
 
-        $this->httpClient->request($request);
+        return (new HttpClient())->request($request);
     }
 
     private function buildRequest(

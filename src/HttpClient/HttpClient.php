@@ -2,6 +2,7 @@
 
 namespace Segakgd\TelegramClient\HttpClient;
 
+use Segakgd\TelegramClient\HttpClient\Request\BadRequestException;
 use Segakgd\TelegramClient\HttpClient\Request\Request;
 use Segakgd\TelegramClient\HttpClient\Response\Response;
 
@@ -10,6 +11,9 @@ class HttpClient
     public const METHOD_POST = 'POST';
     public const METHOD_GET = 'GET';
 
+    /**
+     * @throws BadRequestException
+     */
     public function request(Request $request): Response
     {
         $token = $request->getToken();
@@ -34,7 +38,7 @@ class HttpClient
         $responseClassName = $request->getResponseClassName();
 
         if ($code == 400) {
-            throw new \Exception('Error code 400');
+            throw new BadRequestException('Error code 400');
         }
 
         if ($responseClassName) {
