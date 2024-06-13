@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Integration\Telegram;
+namespace Segakgd\TelegramClient;
 
 use App\Dto\Responsible\ResponsibleMessageDto;
 use App\Dto\Core\Telegram\Request\Invoice\InvoiceDto;
@@ -19,8 +19,6 @@ readonly class TelegramService implements TelegramServiceInterface
         private HttpClientInterface $httpClient,
     ) {
     }
-
-    // todo если ожидать тут бота, то многие проблемы решит это, т.к у бота есть и id проекта и токены
 
     /**
      * @return GetWebhookInfoDto

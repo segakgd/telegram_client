@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Dto\Core\Telegram\Request\Webhook;
+namespace Segakgd\TelegramClient\Dto\Request\Webhook;
 
 class WebhookDto
 {

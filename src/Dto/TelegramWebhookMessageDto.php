@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Dto\Webhook\Telegram;
-
-use Symfony\Component\Serializer\Annotation\SerializedName;
+namespace Segakgd\TelegramClient\Dto;
 
 class TelegramWebhookMessageDto
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service\System\HttpClient\Response;
+namespace Segakgd\TelegramClient\HttpClient\Response;
 
-class Response implements ResponseInterface
+class Response
 {
     public int $code = 200;
 

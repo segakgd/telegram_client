@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Dto\Core\Telegram\Response;
+namespace Segakgd\TelegramClient\Dto\Response;
 
-use App\Service\System\HttpClient\Response\Response;
-
-class GetWebhookInfoDto extends Response // todo перенести в App\Service\System\HttpClient\Response
+class GetWebhookInfoDto
 {
     private string $url;
 

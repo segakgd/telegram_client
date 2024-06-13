@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Dto\Webhook\Telegram;
+namespace Segakgd\TelegramClient\Dto;
 
 use Exception;
-use Symfony\Component\Serializer\Annotation\SerializedName;
 
 class TelegramWebhookDto
 {

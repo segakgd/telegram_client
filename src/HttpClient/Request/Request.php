@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service\System\HttpClient\Request;
+namespace Segakgd\TelegramClient\HttpClient\Request;
 
-class Request implements RequestInterface
+class Request
 {
     private ?array $data = null;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Dto\Core\Telegram\Request\Message;
+namespace Segakgd\TelegramClient\Dto\Request\Message;
 
 class PhotoDto
 {
