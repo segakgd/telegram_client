@@ -2,7 +2,10 @@
   "name": "segakgd/telegram_client",
   "description": "A PHP client for using Telegram API",
   "keywords": [
-    "telegram", "api", "wrapper", "client"
+    "telegram",
+    "api",
+    "wrapper",
+    "client"
   ],
   "homepage": "https://github.com/segakgd/telegram_client",
   "license": "MIT",
@@ -14,7 +17,12 @@
     }
   ],
   "require": {
-    "php" : ">=8.2",
+    "php": ">=8.2",
     "ext-curl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Segakgd\\TelegramClient\\": "src/"
+    }
   }
 }
