@@ -19,7 +19,7 @@ class HttpClient
         $response = match ($method) {
             self::METHOD_GET => $this->sendGet($uri, $requestArray),
             self::METHOD_POST => $this->sendPost($uri, $requestArray),
-            default => throw new InvalidMethodException("The $method method is invalid"),
+            default => throw new InvalidMethodException($method),
         };
 
         return json_decode($response ?? '', true) ?? [];

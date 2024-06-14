@@ -7,7 +7,9 @@ use Segakgd\TelegramClient\Dto\Request\Message\MessageDto;
 use Segakgd\TelegramClient\Dto\Request\Message\PhotoDto;
 use Segakgd\TelegramClient\Dto\Request\Webhook\WebhookDto;
 use Segakgd\TelegramClient\Dto\Response\GetWebhookInfoDto;
+use Segakgd\TelegramClient\HttpClient\Core\HttpClient;
 use Segakgd\TelegramClient\HttpClient\Exception\BadRequestException;
+use Segakgd\TelegramClient\HttpClient\Exception\InvalidMethodException;
 use Segakgd\TelegramClient\HttpClient\HttpService;
 use Segakgd\TelegramClient\HttpClient\Request\Request;
 use Segakgd\TelegramClient\HttpClient\Response\Response;
@@ -16,15 +18,15 @@ readonly class TelegramManager
 {
     /**
      * @throws BadRequestException
+     * @throws InvalidMethodException
      */
     public function getWebhookInfo(string $token): Response
     {
         $request = $this->buildRequest(
-            HttpService::METHOD_GET,
-            'getWebhookInfo',
-            $token,
-            null,
-            GetWebhookInfoDto::class
+            method: HttpClient::METHOD_GET,
+            scenario: 'getWebhookInfo',
+            token: $token,
+            responseClassName: GetWebhookInfoDto::class
         );
 
 
@@ -33,6 +35,7 @@ readonly class TelegramManager
 
     /**
      * @throws BadRequestException
+     * @throws InvalidMethodException
      */
     public function sendPhoto($responsibleMessageDto, string $token, int $chatId): Response
     {
@@ -49,10 +52,10 @@ readonly class TelegramManager
         $photoDto->setParseMode('MarkdownV2');
 
         $request = $this->buildRequest(
-            HttpService::METHOD_POST,
-            'sendPhoto',
-            $token,
-            $photoDto->getArray(),
+            method: HttpClient::METHOD_POST,
+            scenario: 'sendPhoto',
+            token: $token,
+            data: $photoDto->getArray(),
         );
 
         return (new HttpService())->request($request);
@@ -60,6 +63,7 @@ readonly class TelegramManager
 
     /**
      * @throws BadRequestException
+     * @throws InvalidMethodException
      */
     public function sendMessage($responsibleMessageDto, string $token, int $chatId): Response
     {
@@ -73,10 +77,10 @@ readonly class TelegramManager
         $messageDto->setReplyMarkup($replyMarkup);
 
         $request = $this->buildRequest(
-            HttpService::METHOD_POST,
-            'sendMessage',
-            $token,
-            $messageDto->getArray(),
+            method: HttpClient::METHOD_POST,
+            scenario: 'sendMessage',
+            token: $token,
+            data: $messageDto->getArray(),
         );
 
         return (new HttpService())->request($request);
@@ -84,14 +88,15 @@ readonly class TelegramManager
 
     /**
      * @throws BadRequestException
+     * @throws InvalidMethodException
      */
     public function sendInvoice(InvoiceDto $invoiceDto, string $token): Response
     {
         $request = $this->buildRequest(
-            HttpService::METHOD_POST,
-            'sendInvoice',
-            $token,
-            $invoiceDto->getArray(),
+            method: HttpClient::METHOD_POST,
+            scenario: 'sendInvoice',
+            token: $token,
+            data: $invoiceDto->getArray(),
         );
 
         return (new HttpService())->request($request);
@@ -99,14 +104,15 @@ readonly class TelegramManager
 
     /**
      * @throws BadRequestException
+     * @throws InvalidMethodException
      */
     public function setWebhook(WebhookDto $webhookDto, string $token): Response
     {
         $request = $this->buildRequest(
-            HttpService::METHOD_POST,
-            'setWebhook',
-            $token,
-            $webhookDto->getArray(),
+            method: HttpClient::METHOD_POST,
+            scenario: 'setWebhook',
+            token: $token,
+            data: $webhookDto->getArray(),
         );
 
         return (new HttpService())->request($request);
