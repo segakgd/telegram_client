@@ -8,7 +8,7 @@ use Segakgd\TelegramClient\Dto\Request\Message\PhotoDto;
 use Segakgd\TelegramClient\Dto\Request\Webhook\WebhookDto;
 use Segakgd\TelegramClient\Dto\Response\GetWebhookInfoDto;
 use Segakgd\TelegramClient\HttpClient\Exception\BadRequestException;
-use Segakgd\TelegramClient\HttpClient\HttpClient;
+use Segakgd\TelegramClient\HttpClient\HttpService;
 use Segakgd\TelegramClient\HttpClient\Request\Request;
 use Segakgd\TelegramClient\HttpClient\Response\Response;
 
@@ -20,7 +20,7 @@ readonly class TelegramManager
     public function getWebhookInfo(string $token): Response
     {
         $request = $this->buildRequest(
-            HttpClient::METHOD_GET,
+            HttpService::METHOD_GET,
             'getWebhookInfo',
             $token,
             null,
@@ -28,7 +28,7 @@ readonly class TelegramManager
         );
 
 
-        return (new HttpClient())->request($request);
+        return (new HttpService())->request($request);
     }
 
     /**
@@ -49,13 +49,13 @@ readonly class TelegramManager
         $photoDto->setParseMode('MarkdownV2');
 
         $request = $this->buildRequest(
-            HttpClient::METHOD_POST,
+            HttpService::METHOD_POST,
             'sendPhoto',
             $token,
             $photoDto->getArray(),
         );
 
-        return (new HttpClient())->request($request);
+        return (new HttpService())->request($request);
     }
 
     /**
@@ -73,13 +73,13 @@ readonly class TelegramManager
         $messageDto->setReplyMarkup($replyMarkup);
 
         $request = $this->buildRequest(
-            HttpClient::METHOD_POST,
+            HttpService::METHOD_POST,
             'sendMessage',
             $token,
             $messageDto->getArray(),
         );
 
-        return (new HttpClient())->request($request);
+        return (new HttpService())->request($request);
     }
 
     /**
@@ -88,13 +88,13 @@ readonly class TelegramManager
     public function sendInvoice(InvoiceDto $invoiceDto, string $token): Response
     {
         $request = $this->buildRequest(
-            HttpClient::METHOD_POST,
+            HttpService::METHOD_POST,
             'sendInvoice',
             $token,
             $invoiceDto->getArray(),
         );
 
-        return (new HttpClient())->request($request);
+        return (new HttpService())->request($request);
     }
 
     /**
@@ -103,13 +103,13 @@ readonly class TelegramManager
     public function setWebhook(WebhookDto $webhookDto, string $token): Response
     {
         $request = $this->buildRequest(
-            HttpClient::METHOD_POST,
+            HttpService::METHOD_POST,
             'setWebhook',
             $token,
             $webhookDto->getArray(),
         );
 
-        return (new HttpClient())->request($request);
+        return (new HttpService())->request($request);
     }
 
     private function buildRequest(
