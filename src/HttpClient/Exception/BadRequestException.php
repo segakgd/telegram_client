@@ -1,6 +1,6 @@
 <?php
 
-namespace Segakgd\TelegramClient\HttpClient\Request;
+namespace Segakgd\TelegramClient\HttpClient\Exception;
 
 use Exception;
 

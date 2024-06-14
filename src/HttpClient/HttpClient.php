@@ -2,7 +2,7 @@
 
 namespace Segakgd\TelegramClient\HttpClient;
 
-use Segakgd\TelegramClient\HttpClient\Request\BadRequestException;
+use Segakgd\TelegramClient\HttpClient\Exception\BadRequestException;
 use Segakgd\TelegramClient\HttpClient\Request\Request;
 use Segakgd\TelegramClient\HttpClient\Response\Response;
 

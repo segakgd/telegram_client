@@ -7,8 +7,8 @@ use Segakgd\TelegramClient\Dto\Request\Message\MessageDto;
 use Segakgd\TelegramClient\Dto\Request\Message\PhotoDto;
 use Segakgd\TelegramClient\Dto\Request\Webhook\WebhookDto;
 use Segakgd\TelegramClient\Dto\Response\GetWebhookInfoDto;
+use Segakgd\TelegramClient\HttpClient\Exception\BadRequestException;
 use Segakgd\TelegramClient\HttpClient\HttpClient;
-use Segakgd\TelegramClient\HttpClient\Request\BadRequestException;
 use Segakgd\TelegramClient\HttpClient\Request\Request;
 use Segakgd\TelegramClient\HttpClient\Response\Response;
 
