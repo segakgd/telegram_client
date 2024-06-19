@@ -37,18 +37,13 @@ readonly class TelegramManager
      * @throws BadRequestException
      * @throws InvalidMethodException
      */
-    public function sendPhoto($responsibleMessageDto, string $token, int $chatId): Response
+    public function sendPhoto(string $message, string $photo, string $token, int $chatId): Response
     {
-        $message = $responsibleMessageDto->getMessage();
-        $replyMarkup = $responsibleMessageDto->getKeyBoard();
-        $photo = $responsibleMessageDto->getPhoto();
-
         $photoDto = (new PhotoDto())
             ->setChatId($chatId);
 
         $photoDto->setPhoto($photo);
         $photoDto->setCaption($message);
-        $photoDto->setReplyMarkup($replyMarkup);
         $photoDto->setParseMode('MarkdownV2');
 
         $request = $this->buildRequest(
@@ -65,16 +60,12 @@ readonly class TelegramManager
      * @throws BadRequestException
      * @throws InvalidMethodException
      */
-    public function sendMessage($responsibleMessageDto, string $token, int $chatId): Response
+    public function sendMessage(string $message, string $token, int $chatId): Response
     {
-        $message = $responsibleMessageDto->getMessage();
-        $replyMarkup = $responsibleMessageDto->getKeyBoard();
-
         $messageDto = (new MessageDto())
             ->setChatId($chatId);
 
         $messageDto->setText($message);
-        $messageDto->setReplyMarkup($replyMarkup);
 
         $request = $this->buildRequest(
             method: HttpClient::METHOD_POST,

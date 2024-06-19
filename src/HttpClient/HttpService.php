@@ -18,7 +18,7 @@ class HttpService
      */
     public function request(Request $request): Response
     {
-        $responseArray = (new HttpClient)->request(
+        $response = (new HttpClient)->request(
             uri: $this->makeTargetUri(
                 token: $request->getToken(),
                 scenario: $request->getScenario()
@@ -27,30 +27,7 @@ class HttpService
             method: $request->getMethod()
         );
 
-        $code = 400;
-
-        if (isset($responseArray['ok'])) {
-            $code = $responseArray['ok'] === true ? 200 : 400;
-        }
-
-        $description = $responseArray['description'] ?? '';
-
-        $result['result'] = $responseArray['result'] ?? [];
-
-        $result['code'] = $code;
-        $result['description'] = $description;
-
-        $responseClassName = $request->getResponseClassName();
-
-        if ($code == 400) {
-            throw new BadRequestException('Error code 400');
-        }
-
-        if ($responseClassName) {
-            // todo make responce
-        }
-
-        return new Response($code, $description);
+        return Response::mapFromArray($response);
     }
 
     private function makeTargetUri(string $token, string $scenario): string
