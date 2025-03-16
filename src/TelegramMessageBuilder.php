@@ -81,12 +81,29 @@ class TelegramMessageBuilder
 
     private function escapeMarkdown(string $text): string
     {
-        $specialChars = ["_", "*", "[", "]", "(", ")", "~", "`", ">", "#", "+", "-", "=", "|", "{", "}", ".", "!"];
+        $replacements = [
+            '\\' => '\\\\',
+            '_' => '\_',
+            '*' => '\*',
+            '[' => '\[',
+            ']' => '\]',
+            '(' => '\(',
+            ')' => '\)',
+            '~' => '\~',
+            '`' => '\`',
+            '>' => '\>',
+            '#' => '\#',
+            '+' => '\+',
+            '-' => '\-',
+            '=' => '\=',
+            '|' => '\|',
+            '{' => '\{',
+            '}' => '\}',
+            '.' => '\.',
+            '!' => '\!',
+            '/' => '\/',
+        ];
 
-        foreach ($specialChars as $char) {
-            $text = str_replace($char, "\\" . $char, $text);
-        }
-
-        return $text;
+        return strtr($text, $replacements);
     }
 }
