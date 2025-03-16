@@ -1,4 +1,4 @@
-# telegram_client
+# Telegram report client
 
 A PHP client library for interacting with the Telegram Bot API.
 
